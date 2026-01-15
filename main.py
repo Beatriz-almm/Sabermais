@@ -12,4 +12,6 @@ janela.geometry("400x450")
 # cores da tela do quiz 
 background_color="#ececec"
 text_color="#000d40"
-color_botao = ""
+color_botao = "#011bf4"
+janela.config(bg=background_color)
+janela.option_add('*Font', 'Arial')
