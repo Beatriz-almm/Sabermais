@@ -1,4 +1,5 @@
 import tkinter as tk 
+from tkinter import messagebox
 import pandas as pd 
 import random
 
@@ -17,11 +18,11 @@ def checkanswer(answer):
   if answer == resposta_certa.get():
     score+=1
 
-pergunta_atual+=1
-if pergunta_atual <len(questions):
-  display_question()
-else:
-  show_result()
+  pergunta_atual+=1
+  if pergunta_atual <len(questions):
+      display_question()
+  else:
+      show_result()
 
 
 
@@ -30,10 +31,10 @@ else:
 def display_question():
   question, option1, option2, option3, option4, answer= questions[pergunta_atual]
   question_label.config(text=question)
-  option1_btn.config(text="option1", state=tk.NORMAL, command=lambda:checkanswer(1))
-  option2_btn.config(text="option2", state=tk.NORMAL,command=lambda:checkanswer(2))
-  option3_btn.config(text="option3", state=tk.NORMAL,command=lambda:checkanswer(3))
-  option4_btn.config(text="option4", state=tk.NORMAL,command=lambda:checkanswer(4))
+  option1_btn.config(text=option1, state=tk.NORMAL, command=lambda:checkanswer(1))
+  option2_btn.config(text=option2, state=tk.NORMAL,command=lambda:checkanswer(2))
+  option3_btn.config(text=option3, state=tk.NORMAL,command=lambda:checkanswer(3))
+  option4_btn.config(text=option4, state=tk.NORMAL,command=lambda:checkanswer(4))
   resposta_certa.set(answer)
 
 # função para exibir o resultado final 
@@ -69,18 +70,19 @@ color_botao = "#011bf4"
 botao_text_color = "#ffffff"
 janela.config(bg=background_color)
 janela.option_add('*Font', 'Arial')
+resposta_certa= tk.IntVar()
 
 
 
 # icone na tela 
 
-app_icone= PhotoImage(file"corujinha.png.png")
-app_label= tk.label(janela, image=app_icone, bg=background_color)
+app_icone= PhotoImage(file="corujinha.png.png")
+app_label= tk.Label(janela, image=app_icone, bg=background_color)
 app_label.pack(pady=10)
 
 
 # componentes da interface
-pergunta_label= tk.label(janela, text="",wraplength=380, bg=background_color, fg=text_color, font=("Arial" , 12 , "bold"))
+pergunta_label= tk.Label(janela, text="",wraplength=380, bg=background_color, fg=text_color, font=("Arial" , 12 , "bold"))
 pergunta_label.pack(pady=20)
 
 
@@ -97,9 +99,10 @@ option3_btn.pack(pady=10)
 option4_btn = tk.Button(janela, text="Jogar Novamente", width=30, bg=color_botao, fg=botao_text_color, font=("Arial", 10, "bold"))
 option4_btn.pack(pady=10)
 
-play_again_btn = tk.Button(janela,command=play_again(), text="", width=30, bg=color_botao, fg=botao_text_color, state=tk.DISABLED, font=("Arial", 10, "bold"))
+play_again_btn = tk.Button(janela,command=play_again, text="", width=30, bg=color_botao, fg=botao_text_color, state=tk.DISABLED, font=("Arial", 10, "bold"))
 
 
 display_question()
 janela.mainloop()
+
 
