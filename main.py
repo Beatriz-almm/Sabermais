@@ -5,7 +5,7 @@ import random
 # carregar arquivo do excel
 df= pd.read_excel("questions.xlsx")
 # pegar perguntas aleatoriamente 
-perguntas = df.sample(n=10).values.tolist()
+questions = df.sample(n=10).values.tolist()
 
 # variaveis globais
 score= 0 
@@ -17,8 +17,8 @@ def checkanswer(answer):
   if answer == resposta_certa.get():
     score+=1
 
-resposta_certa+=1
-if pergunta_atual <len(perguntas):
+pergunta_atual+=1
+if pergunta_atual <len(questions):
   display_question()
 else:
   show_result()
@@ -28,17 +28,17 @@ else:
 
 # função para exibir a prox pergunta 
 def display_question():
-  question, option1, option2, option3, option4, answer= perguntas[pergunta_atual]
-  questions_label.config(text=question)
+  question, option1, option2, option3, option4, answer= questions[pergunta_atual]
+  question_label.config(text=question)
   option1_btn.config(text="option1", state=tk.NORMAL, command=lambda:checkanswer(1))
-  option2_btn.config(text="option1", state=tk.NORMAL,command=lambda:checkanswer(2))
-  option3_btn.config(text="option1", state=tk.NORMAL,command=lambda:checkanswer(3))
-  option4_btn.config(text="option1", state=tk.NORMAL,command=lambda:checkanswer(4))
+  option2_btn.config(text="option2", state=tk.NORMAL,command=lambda:checkanswer(2))
+  option3_btn.config(text="option3", state=tk.NORMAL,command=lambda:checkanswer(3))
+  option4_btn.config(text="option4", state=tk.NORMAL,command=lambda:checkanswer(4))
   resposta_certa.set(answer)
 
 # função para exibir o resultado final 
 def show_result():
-  messagebox.showinfo("Quiz Finalizado", f"Parabéns! Você completou o quiz. \n\n Pontuação final : {score/len(questions)}")
+  messagebox.showinfo("Quiz Finalizado", f"Parabéns! Você completou o quiz.\n\nPontuação final : {score/len(questions)}")
     option1_btn.config(state=tk.DISABLED)
     option2_btn.config(state=tk.DISABLED)
     option3_btn.config(state=tk.DISABLED)
@@ -49,7 +49,7 @@ def play_again():
   global score, pergunta_atual
   score= 0 
   pergunta_atual= 0 
-  random.shuffle(questions)
+  random.shuffle(perguntas)
   option1_btn.config(state=tk.NORMAL)
   option2_btn.config(state=tk.NORMAL)
   option3_btn.config(state=tk.NORMAL)
@@ -81,7 +81,7 @@ app_label.pack(pady=10)
 
 # componentes da interface
 pergunta_label= tk.label(janela, text="",wraplength=380, bg=background_color, fg=text_color, font=("Arial" , 12 , "bold"))
-question_label.pack(pady=20)
+pergunta_label.pack(pady=20)
 
 
 
@@ -102,3 +102,4 @@ play_again_btn = tk.Button(janela,command=play_again(), text="", width=30, bg=co
 
 display_question()
 janela.mainloop()
+
