@@ -31,7 +31,7 @@ def checkanswer(answer):
 # função para exibir a prox pergunta 
 def display_question():
   question, option1, option2, option3, option4, answer= questions[pergunta_atual]
-  question_label.config(text=question)
+  pergunta_label.config(text=question)
   option1_btn.config(text=option1, state=tk.NORMAL, command=lambda:checkanswer(1))
   option2_btn.config(text=option2, state=tk.NORMAL,command=lambda:checkanswer(2))
   option3_btn.config(text=option3, state=tk.NORMAL,command=lambda:checkanswer(3))
@@ -40,12 +40,13 @@ def display_question():
 
 # função para exibir o resultado final 
 def show_result():
-  messagebox.showinfo("Quiz Finalizado", f"Parabéns! Você completou o quiz.\n\nPontuação final : {score/len(questions)}")
-    option1_btn.config(state=tk.DISABLED)
-    option2_btn.config(state=tk.DISABLED)
-    option3_btn.config(state=tk.DISABLED)
-    option4_btn.config(state=tk.DISABLED)
-    play_again_btn.pack()
+  messagebox.showinfo("Quiz Finalizado", f"Parabéns! Você completou o quiz.\n\nPontuação final : {score}/{len(questions)}")
+  option1_btn.config(state=tk.DISABLED)
+  option2_btn.config(state=tk.DISABLED)
+  option3_btn.config(state=tk.DISABLED)
+  option4_btn.config(state=tk.DISABLED)
+  play_again_btn.config(state=tk.NORMAL, text="Jogar Novamente")
+  play_again_btn.pack()
 # função para jogar novamente 
 def play_again():
   global score, pergunta_atual
@@ -57,6 +58,7 @@ def play_again():
   option3_btn.config(state=tk.NORMAL)
   option4_btn.config(state=tk.NORMAL)
   play_again_btn.pack_forget()
+  display_question()
 
 
 
@@ -97,7 +99,7 @@ option2_btn.pack(pady=10)
 option3_btn = tk.Button(janela, text="", width=30, bg=color_botao, fg=botao_text_color, state=tk.DISABLED, font=("Arial", 10, "bold"))
 option3_btn.pack(pady=10)
 
-option4_btn = tk.Button(janela, text="", width=30, bg=color_botao, fg=botao_text_color, font=("Arial", 10, "bold"))
+option4_btn = tk.Button(janela, text="", width=30, bg=color_botao, fg=botao_text_color,state=tk.DISABLED, font=("Arial", 10, "bold"))
 option4_btn.pack(pady=10)
 
 play_again_btn = tk.Button(janela,command=play_again, text="", width=30, bg=color_botao, fg=botao_text_color, state=tk.DISABLED, font=("Arial", 10, "bold"))
@@ -105,6 +107,7 @@ play_again_btn = tk.Button(janela,command=play_again, text="", width=30, bg=colo
 
 display_question()
 janela.mainloop()
+
 
 
 
