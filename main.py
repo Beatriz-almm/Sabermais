@@ -1,5 +1,6 @@
 import tkinter as tk 
 from tkinter import messagebox
+from tkinter import PhotoImage
 import pandas as pd 
 import random
 
@@ -50,7 +51,7 @@ def play_again():
   global score, pergunta_atual
   score= 0 
   pergunta_atual= 0 
-  random.shuffle(perguntas)
+  random.shuffle(questions)
   option1_btn.config(state=tk.NORMAL)
   option2_btn.config(state=tk.NORMAL)
   option3_btn.config(state=tk.NORMAL)
@@ -96,7 +97,7 @@ option2_btn.pack(pady=10)
 option3_btn = tk.Button(janela, text="", width=30, bg=color_botao, fg=botao_text_color, state=tk.DISABLED, font=("Arial", 10, "bold"))
 option3_btn.pack(pady=10)
 
-option4_btn = tk.Button(janela, text="Jogar Novamente", width=30, bg=color_botao, fg=botao_text_color, font=("Arial", 10, "bold"))
+option4_btn = tk.Button(janela, text="", width=30, bg=color_botao, fg=botao_text_color, font=("Arial", 10, "bold"))
 option4_btn.pack(pady=10)
 
 play_again_btn = tk.Button(janela,command=play_again, text="", width=30, bg=color_botao, fg=botao_text_color, state=tk.DISABLED, font=("Arial", 10, "bold"))
@@ -104,5 +105,6 @@ play_again_btn = tk.Button(janela,command=play_again, text="", width=30, bg=colo
 
 display_question()
 janela.mainloop()
+
 
 
