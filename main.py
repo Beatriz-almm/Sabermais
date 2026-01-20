@@ -2,8 +2,18 @@ import tkinter as tk
 from tkinter import messagebox
 from tkinter import PhotoImage
 import csv
+from datetime import datetime
 import pandas as pd 
 import random
+
+def salvar_resultado(nome, pontos):
+    with open("resultados.csv", "a", newline="", encoding="utf-8") as arquivo:
+        writer = csv.writer(arquivo)
+        writer.writerow([
+            nome,
+            pontos,
+            datetime.now().strftime("%d/%m/%Y %H:%M")])
+
 
 # carregar arquivo do excel
 try:
@@ -112,6 +122,7 @@ play_again_btn = tk.Button(janela,command=play_again, text="", width=30, bg=colo
 
 display_question()
 janela.mainloop()
+
 
 
 
