@@ -1,13 +1,18 @@
 import tkinter as tk 
 from tkinter import messagebox
 from tkinter import PhotoImage
+import csv
 import pandas as pd 
 import random
 
 # carregar arquivo do excel
-df= pd.read_excel("questions.xlsx")
-# pegar perguntas aleatoriamente 
-questions = df.sample(n=10).values.tolist()
+try:
+    df = pd.read_excel("questions.xlsx")
+    questions = df.sample(n=10).values.tolist()
+except FileNotFoundError:
+    messagebox.showerror("Erro", "Arquivo questions.xlsx não encontrado.")
+    exit()
+
 
 # variaveis globais
 score= 0 
@@ -107,6 +112,7 @@ play_again_btn = tk.Button(janela,command=play_again, text="", width=30, bg=colo
 
 display_question()
 janela.mainloop()
+
 
 
 
