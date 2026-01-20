@@ -5,15 +5,19 @@ import csv
 from datetime import datetime
 import pandas as pd 
 import random
-# salvar resultados dos jogadores 
-def salvar_resultado(nome, pontos):
-    with open("resultados.csv", "a", newline="", encoding="utf-8") as arquivo:
-        writer = csv.writer(arquivo)
-        writer.writerow([
-            nome,
-            pontos,
-            datetime.now().strftime("%d/%m/%Y %H:%M")])
+from tkinter import simpledialog
+import os
 
+arquivo_csv = os.path.join(os.path.dirname(__file__), "resultados.csv")
+
+def salvar_resultado(nome, pontos):
+    try:
+        with open(arquivo_csv, "a", newline="", encoding="utf-8") as arquivo:
+            writer = csv.writer(arquivo)
+            writer.writerow([nome, pontos, datetime.now().strftime("%d/%m/%Y %H:%M")])
+        print(f"Salvo: {nome}, {pontos}")  # para testar no console
+    except Exception as e:
+        print("Erro ao salvar resultado:", e)
 
 # carregar arquivo do excel
 try:
@@ -47,21 +51,25 @@ def checkanswer(answer):
 def display_question():
   question, option1, option2, option3, option4, answer= questions[pergunta_atual]
   pergunta_label.config(text=question)
-  option1_btn.config(text=option1, state=tk.NORMAL, command=lambda:checkanswer(1))
-  option2_btn.config(text=option2, state=tk.NORMAL,command=lambda:checkanswer(2))
-  option3_btn.config(text=option3, state=tk.NORMAL,command=lambda:checkanswer(3))
-  option4_btn.config(text=option4, state=tk.NORMAL,command=lambda:checkanswer(4))
+  option1_btn.config(text=option1, state=tk.NORMAL, command=lambda:checkanswer(option1))
+  option2_btn.config(text=option2, state=tk.NORMAL,command=lambda:checkanswer(option2))
+  option3_btn.config(text=option3, state=tk.NORMAL,command=lambda:checkanswer(option3))
+  option4_btn.config(text=option4, state=tk.NORMAL,command=lambda:checkanswer(option4))
   resposta_certa.set(answer)
 
 # função para exibir o resultado final 
 def show_result():
-  messagebox.showinfo("Quiz Finalizado", f"Parabéns! Você completou o quiz.\n\nPontuação final : {score}/{len(questions)}")
-  option1_btn.config(state=tk.DISABLED)
-  option2_btn.config(state=tk.DISABLED)
-  option3_btn.config(state=tk.DISABLED)
-  option4_btn.config(state=tk.DISABLED)
-  play_again_btn.config(state=tk.NORMAL, text="Jogar Novamente")
-  play_again_btn.pack()
+      # pedir o nome do jogador
+    nome = simpledialog.askstring("Nome", "Digite seu nome:")
+    if nome:  # só salva se o jogador digitar algo
+        salvar_resultado(nome, score)
+    messagebox.showinfo("Quiz Finalizado", f"Parabéns! Você completou o quiz.\n\nPontuação final : {score}/{len(questions)}")
+    option1_btn.config(state=tk.DISABLED)
+    option2_btn.config(state=tk.DISABLED)
+    option3_btn.config(state=tk.DISABLED)
+    option4_btn.config(state=tk.DISABLED)
+    play_again_btn.config(state=tk.NORMAL, text="Jogar Novamente")
+    play_again_btn.pack()
 # função para jogar novamente 
 def play_again():
   global score, pergunta_atual
@@ -88,7 +96,7 @@ color_botao = "#011bf4"
 botao_text_color = "#ffffff"
 janela.config(bg=background_color)
 janela.option_add('*Font', 'Arial')
-resposta_certa= tk.IntVar()
+resposta_certa= tk.StringVar()
 
 
 
@@ -119,13 +127,7 @@ option4_btn.pack(pady=10)
 
 play_again_btn = tk.Button(janela,command=play_again, text="", width=30, bg=color_botao, fg=botao_text_color, state=tk.DISABLED, font=("Arial", 10, "bold"))
 
-
 display_question()
 janela.mainloop()
-
-
-
-
-
 
 
