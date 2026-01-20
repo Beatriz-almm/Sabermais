@@ -19,6 +19,8 @@ Interface gráfica interativa
 Leitura automática de perguntas a partir de arquivo Excel
 Seleção aleatória de perguntas
 Sistema de pontuação
+Salvamento automático dos resultados (nome, pontuação, data e hora) em arquivo CSV
+Tratamento de erros na leitura dos arquivos
 --------
 Integrantes: 
 Beatriz Almeida
@@ -26,7 +28,5 @@ Emilly Maria
 Maria Júlia Ricarte 
 Nayara Lúcia 
 Sofia de Carvalho
+--------
 
-Salvamento automático dos resultados (nome, pontuação, data e hora) em arquivo CSV
-
-Tratamento de erros na leitura dos arquivos
