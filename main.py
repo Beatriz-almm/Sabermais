@@ -5,7 +5,7 @@ import csv
 from datetime import datetime
 import pandas as pd 
 import random
-
+# salvar resultados dos jogadores 
 def salvar_resultado(nome, pontos):
     with open("resultados.csv", "a", newline="", encoding="utf-8") as arquivo:
         writer = csv.writer(arquivo)
@@ -122,6 +122,7 @@ play_again_btn = tk.Button(janela,command=play_again, text="", width=30, bg=colo
 
 display_question()
 janela.mainloop()
+
 
 
 
