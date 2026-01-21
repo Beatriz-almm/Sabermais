@@ -5,7 +5,7 @@ Bibliotecas utilizadas:
 Tkinter: utilizada para criação de interface gráfica 
 Pandas: leitura e manipulação de arquivo Excel que continha as perguntas 
 csv: para gravação de resultado de jogadores 
-random math: seleção aleatória de perguntas 
+random: seleção aleatória de perguntas 
 datetime: registro em arquivo csv de data e hora dos resultados 
 os: garantir interação do arquivo csv com o  main.py
 --------
