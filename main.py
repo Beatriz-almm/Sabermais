@@ -15,7 +15,7 @@ def salvar_resultado(nome, pontos):
         with open(arquivo_csv, "a", newline="", encoding="utf-8") as arquivo:
             writer = csv.writer(arquivo)
             writer.writerow([nome, pontos, datetime.now().strftime("%d/%m/%Y %H:%M")])
-        print(f"Salvo: {nome}, {pontos}")  # para testar no console
+        print(f"Salvo: {nome}, {pontos}") 
     except Exception as e:
         print("Erro ao salvar resultado:", e)
 
@@ -36,25 +36,22 @@ pergunta_atual = 0
 def checkanswer(answer):
   global score, pergunta_atual
   if answer == resposta_certa.get():
-    score+=1
+        score += 1
 
-  pergunta_atual+=1
+  pergunta_atual += 1
+
   if pergunta_atual <len(questions):
-      display_question()
+     display_question()
   else:
-      show_result()
-
-
-
-
+     show_result()
 # função para exibir a prox pergunta 
 def display_question():
   question, option1, option2, option3, option4, answer= questions[pergunta_atual]
   pergunta_label.config(text=question)
-  option1_btn.config(text=option1, state=tk.NORMAL, command=lambda:checkanswer(option1))
-  option2_btn.config(text=option2, state=tk.NORMAL,command=lambda:checkanswer(option2))
-  option3_btn.config(text=option3, state=tk.NORMAL,command=lambda:checkanswer(option3))
-  option4_btn.config(text=option4, state=tk.NORMAL,command=lambda:checkanswer(option4))
+  option1_btn.config(text=option1, state=tk.NORMAL, command=lambda:checkanswer(1))
+  option2_btn.config(text=option2, state=tk.NORMAL,command=lambda:checkanswer(2))
+  option3_btn.config(text=option3, state=tk.NORMAL,command=lambda:checkanswer(3))
+  option4_btn.config(text=option4, state=tk.NORMAL,command=lambda:checkanswer(4))
   resposta_certa.set(answer)
 
 # função para exibir o resultado final 
@@ -96,9 +93,7 @@ color_botao = "#011bf4"
 botao_text_color = "#ffffff"
 janela.config(bg=background_color)
 janela.option_add('*Font', 'Arial')
-resposta_certa= tk.StringVar()
-
-
+resposta_certa= tk.IntVar()
 
 # icone na tela 
 
@@ -129,5 +124,4 @@ play_again_btn = tk.Button(janela,command=play_again, text="", width=30, bg=colo
 
 display_question()
 janela.mainloop()
-
 
